@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "313260958520",
+    "project_id": "khmer-flutter-bank-820d8",
+    "storage_bucket": "khmer-flutter-bank-820d8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:313260958520:android:9b1b95dde8ac5fad4ed7cd",
+        "android_client_info": {
+          "package_name": "com.example.cli_firebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYbdG8rBqJ4Py-bKj_ANzA7PbZMgHqOvs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
