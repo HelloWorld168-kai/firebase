@@ -1,3 +1,5 @@
+import 'package:cli_firebase/page/aba_ui.dart';
+import 'package:cli_firebase/firebase/firebase_options.dart';
 import 'package:cli_firebase/page/signup_and_login/log_in.dart';
 import 'package:cli_firebase/page/signup_and_login/sign_up.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -5,7 +7,9 @@ import 'package:flutter/material.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -23,7 +27,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const LogIn(),
+      home: const AbaController(),
     );
   }
 }

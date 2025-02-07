@@ -13,7 +13,7 @@ class _SignInState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.purple[700],
+      backgroundColor: Color(0xFF015F85),
       appBar: AppBar(
         title: Text(
           "Sign Up",
@@ -23,7 +23,7 @@ class _SignInState extends State<SignUp> {
             color: Colors.white,
           ),
         ),
-        backgroundColor: Colors.purple[700],
+        backgroundColor: Color(0xFF015F85),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
@@ -48,7 +48,7 @@ class _SignInState extends State<SignUp> {
               "Create your account",
               style: TextStyle(
                 fontSize: 16,
-                color: Colors.grey,
+                color: Colors.grey[300],
               ),
             ),
           ),
@@ -63,9 +63,9 @@ class _SignInState extends State<SignUp> {
                   width: 350,
                   height: 60,
                   decoration: BoxDecoration(
-                    color: Colors.purple[100],
+                    color: Color(0xFF015F85),
                     borderRadius: BorderRadius.circular(30),
-                    border: Border.all(color: Colors.purple),
+                    border: Border.all(color: Colors.white),
                   ),
                   child: Column(
                     children: [
@@ -74,10 +74,14 @@ class _SignInState extends State<SignUp> {
                         child: TextField(
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            labelText: 'Nickname',
-                            labelStyle: TextStyle(color: Colors.purple),
-                            icon: SvgPicture.asset(
-                              "assets/images/user-stroke-rounded.svg",
+                            labelText: 'Username',
+                            labelStyle: TextStyle(color: Colors.white),
+                            icon: Image.asset(
+                              "assets/icons/id-card.png",
+                              width: 25,
+                              height: 20,
+                              color: Colors.white,
+                              fit: BoxFit.cover,
                             ),
                           ),
                         ),
@@ -90,36 +94,9 @@ class _SignInState extends State<SignUp> {
                   width: 350,
                   height: 60,
                   decoration: BoxDecoration(
-                    color: Colors.purple[100],
+                    color: Color(0xFF015F85),
                     borderRadius: BorderRadius.circular(30),
-                    border: Border.all(color: Colors.purple),
-                  ),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: TextField(
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            labelText: 'Last Name',
-                            labelStyle: TextStyle(color: Colors.purple),
-                            icon: SvgPicture.asset(
-                              "assets/images/user-stroke-rounded.svg",
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 30),
-                Container(
-                  width: 350,
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: Colors.purple[100],
-                    borderRadius: BorderRadius.circular(30),
-                    border: Border.all(color: Colors.purple),
+                    border: Border.all(color: Colors.white),
                   ),
                   child: Column(
                     children: [
@@ -129,9 +106,13 @@ class _SignInState extends State<SignUp> {
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             labelText: 'Email',
-                            labelStyle: TextStyle(color: Colors.purple),
-                            icon: SvgPicture.asset(
-                              "assets/images/user-stroke-rounded.svg",
+                            labelStyle: TextStyle(color: Colors.white),
+                            icon: Image.asset(
+                              "assets/icons/arroba.png",
+                              width: 20,
+                              height: 20,
+                              color: Colors.white,
+                              fit: BoxFit.cover,
                             ),
                           ),
                         ),
@@ -144,9 +125,9 @@ class _SignInState extends State<SignUp> {
                   width: 350,
                   height: 60,
                   decoration: BoxDecoration(
-                    color: Colors.purple[100],
+                    color: Color(0xFF015F85),
                     borderRadius: BorderRadius.circular(30),
-                    border: Border.all(color: Colors.purple),
+                    border: Border.all(color: Colors.white),
                   ),
                   child: Column(
                     children: [
@@ -156,9 +137,13 @@ class _SignInState extends State<SignUp> {
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             labelText: 'Password',
-                            labelStyle: TextStyle(color: Colors.purple),
-                            icon: SvgPicture.asset(
-                              "assets/images/user-stroke-rounded.svg",
+                            labelStyle: TextStyle(color: Colors.white),
+                            icon: Image.asset(
+                              "assets/icons/padlock.png",
+                              width: 20,
+                              height: 20,
+                              color: Colors.white,
+                              fit: BoxFit.cover,
                             ),
                           ),
                         ),
@@ -173,7 +158,7 @@ class _SignInState extends State<SignUp> {
                       width: 350,
                       height: 60,
                       decoration: BoxDecoration(
-                        color: Colors.purple,
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(25),
                       ),
                     ),
@@ -185,11 +170,11 @@ class _SignInState extends State<SignUp> {
                       ),
                       onPressed: () {},
                       child: Text(
-                        "LOGIN",
+                        "SIGN UP",
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Color(0xFF015F85),
                         ),
                       ),
                     ),
@@ -250,7 +235,7 @@ class _SignInState extends State<SignUp> {
                         "OR",
                         style: TextStyle(
                           fontSize: 16,
-                          color: Colors.grey,
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -281,9 +266,9 @@ class _SignInState extends State<SignUp> {
                         width: 90,
                         height: 100,
                         decoration: BoxDecoration(
-                          color: Colors.purple[100],
+                          color: Colors.white,
                           borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: Colors.purple),
+                          border: Border.all(color: Colors.black),
                         ),
                         child: Column(
                           children: [
@@ -317,9 +302,9 @@ class _SignInState extends State<SignUp> {
                         width: 90,
                         height: 100,
                         decoration: BoxDecoration(
-                          color: Colors.purple[100],
+                          color: Colors.white,
                           borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: Colors.purple),
+                          border: Border.all(color: Colors.black),
                         ),
                         child: Column(
                           children: [
@@ -335,7 +320,7 @@ class _SignInState extends State<SignUp> {
                                   ),
                                   SizedBox(height: 10),
                                   Text(
-                                    "Facebook",
+                                    "Google",
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -353,9 +338,9 @@ class _SignInState extends State<SignUp> {
                         width: 90,
                         height: 100,
                         decoration: BoxDecoration(
-                          color: Colors.purple[100],
+                          color: Colors.white,
                           borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: Colors.purple),
+                          border: Border.all(color: Colors.black),
                         ),
                         child: Column(
                           children: [
@@ -371,7 +356,7 @@ class _SignInState extends State<SignUp> {
                                   ),
                                   SizedBox(height: 10),
                                   Text(
-                                    "Facebook",
+                                    "X",
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                     ),

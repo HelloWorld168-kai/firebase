@@ -1,4 +1,6 @@
+import 'package:cli_firebase/page/aba_ui.dart';
 import 'package:cli_firebase/page/signup_and_login/sign_up.dart';
+import 'package:cli_firebase/services/auth_services.dart';
 import 'package:flutter/material.dart';
 import 'package:svg_flutter/svg.dart';
 
@@ -10,12 +12,14 @@ class LogIn extends StatefulWidget {
 }
 
 class _SignAndLogInState extends State<LogIn> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.purple[100],
+      backgroundColor: Color(0xFF015F85),
       appBar: AppBar(
-        backgroundColor: Colors.purple[100],
+        backgroundColor: Color(0xFF015F85),
       ),
       body: Column(
         children: [
@@ -26,6 +30,7 @@ class _SignAndLogInState extends State<LogIn> {
                 style: TextStyle(
                   fontSize: 36,
                   fontWeight: FontWeight.bold,
+                  color: Colors.white,
                 ),
               ),
               SizedBox(height: 30),
@@ -56,7 +61,7 @@ class _SignAndLogInState extends State<LogIn> {
                       height: 60,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
-                        border: Border.all(color: Colors.purple),
+                        border: Border.all(color: Colors.white),
                       ),
                       child: Column(
                         children: [
@@ -66,9 +71,13 @@ class _SignAndLogInState extends State<LogIn> {
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 labelText: 'Username or Email',
-                                labelStyle: TextStyle(color: Colors.purple),
-                                icon: SvgPicture.asset(
-                                  "assets/images/user-stroke-rounded.svg",
+                                labelStyle: TextStyle(color: Colors.white),
+                                icon: Image.asset(
+                                  "assets/icons/user.png",
+                                  width: 20,
+                                  height: 20,
+                                  fit: BoxFit.cover,
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
@@ -82,7 +91,7 @@ class _SignAndLogInState extends State<LogIn> {
                       height: 60,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
-                        border: Border.all(color: Colors.purple),
+                        border: Border.all(color: Colors.white),
                       ),
                       child: Column(
                         children: [
@@ -92,9 +101,13 @@ class _SignAndLogInState extends State<LogIn> {
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 labelText: 'Password',
-                                labelStyle: TextStyle(color: Colors.purple),
-                                icon: SvgPicture.asset(
-                                  "assets/images/user-stroke-rounded.svg",
+                                labelStyle: TextStyle(color: Colors.white),
+                                icon: Image.asset(
+                                  "assets/icons/user.png",
+                                  width: 20,
+                                  height: 20,
+                                  fit: BoxFit.cover,
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
@@ -115,15 +128,30 @@ class _SignAndLogInState extends State<LogIn> {
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             minimumSize: Size(350, 60),
-                            backgroundColor: Colors.purple[100],
+                            backgroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            elevation: 0,
                           ),
-                          onPressed: () {},
+                          onPressed: () async {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AbaController(),
+                              ),
+                            );
+                            await AuthServices().signup(
+                              email: _emailController.text,
+                              password: _passwordController.text,
+                            );
+                          },
                           child: Text(
                             "LOGIN",
                             style: TextStyle(
                               fontSize: 28,
                               fontWeight: FontWeight.bold,
-                              color: Colors.purple,
+                              color: Color(0xFF015F85),
                             ),
                           ),
                         ),
@@ -134,7 +162,7 @@ class _SignAndLogInState extends State<LogIn> {
                       "Forget Password?",
                       style: TextStyle(
                         fontSize: 16,
-                        color: Colors.purple,
+                        color: Colors.white,
                       ),
                     ),
                     SizedBox(height: 30),
@@ -151,7 +179,7 @@ class _SignAndLogInState extends State<LogIn> {
                                     "Dont't have an account?",
                                     style: TextStyle(
                                       fontSize: 14,
-                                      color: Colors.black,
+                                      color: Colors.white,
                                     ),
                                   ),
                                   SizedBox(width: 50),
@@ -168,7 +196,7 @@ class _SignAndLogInState extends State<LogIn> {
                                       "Sign Up",
                                       style: TextStyle(
                                         fontSize: 18,
-                                        color: Colors.purple,
+                                        color: Colors.white,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
@@ -185,8 +213,8 @@ class _SignAndLogInState extends State<LogIn> {
                       children: [
                         Expanded(
                           child: Divider(
-                            color: Colors.black, // Line color
-                            thickness: 1, // Line thickness
+                            color: Colors.white,
+                            thickness: 1,
                           ),
                         ),
                         Padding(
@@ -195,14 +223,14 @@ class _SignAndLogInState extends State<LogIn> {
                             "OR",
                             style: TextStyle(
                               fontSize: 16,
-                              color: Colors.grey, // Text color
+                              color: Colors.white,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
                         Expanded(
                           child: Divider(
-                            color: Colors.black,
+                            color: Colors.white,
                             thickness: 1,
                           ),
                         ),
@@ -211,28 +239,26 @@ class _SignAndLogInState extends State<LogIn> {
                     SizedBox(height: 30),
                     Text(
                       "Sign up with Social Networks",
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
+                      style: TextStyle(fontSize: 16, color: Colors.white),
                     ),
                     SizedBox(height: 30),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         CircleAvatar(
-                          radius: 20,
+                          // radius: 20,
                           backgroundImage: AssetImage(
                             "assets/images/Facebook-Logosu.png",
                           ),
                         ),
                         CircleAvatar(
-                          radius: 20,
+                          // radius: 20,
                           backgroundImage: AssetImage(
                             "assets/images/png-clipart-google-logo-google-logo-google-search-icon-google-text-logo-thumbnail.png",
                           ),
                         ),
                         CircleAvatar(
-                          radius: 20,
+                          // radius: 20,
                           backgroundImage: AssetImage(
                             "assets/images/X_icon_2.svg.png",
                           ),
