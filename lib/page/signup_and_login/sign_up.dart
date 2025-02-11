@@ -1,6 +1,7 @@
+import 'package:cli_firebase/controller/aba_controller.dart';
+import 'package:cli_firebase/page/aba_ui.dart';
 import 'package:cli_firebase/page/signup_and_login/log_in.dart';
 import 'package:flutter/material.dart';
-import 'package:svg_flutter/svg.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -13,7 +14,7 @@ class _SignInState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF015F85),
+      backgroundColor: Color(0xFF023048),
       appBar: AppBar(
         title: Text(
           "Sign Up",
@@ -23,14 +24,14 @@ class _SignInState extends State<SignUp> {
             color: Colors.white,
           ),
         ),
-        backgroundColor: Color(0xFF015F85),
+        backgroundColor: Color(0xFF023048),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(
               context,
               MaterialPageRoute(
-                builder: (context) => LogIn(),
+                builder: (context) => AbaUi(controller: ControllerAba()),
               ),
             );
           },
@@ -202,7 +203,8 @@ class _SignInState extends State<SignUp> {
                               Navigator.pop(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => LogIn(),
+                                  builder: (context) =>
+                                      LogIn(controller: ControllerAba()),
                                 ),
                               );
                             },

@@ -1,20 +1,54 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cli_firebase/controller/aba_controller.dart';
+import 'package:cli_firebase/page/dontknow.dart';
+import 'package:cli_firebase/page/profile.dart';
+import 'package:cli_firebase/page/promotion.dart';
+import 'package:cli_firebase/page/signup_and_login/log_in.dart';
+import 'package:cli_firebase/page/whatever.dart';
 import 'package:flutter/material.dart';
 
-class AbaController extends StatefulWidget {
-  const AbaController({super.key});
+class AbaUi extends StatefulWidget {
+  const AbaUi({
+    super.key,
+    required this.controller,
+  });
+  final ControllerAba controller;
 
   @override
-  State<AbaController> createState() => _AbaControllerState();
+  State<AbaUi> createState() => _AbaControllerState();
 }
 
-class _AbaControllerState extends State<AbaController> {
+class _AbaControllerState extends State<AbaUi> {
+  final textCtrl = TextEditingController();
+  void Function()? onTap;
+  void Function(String)? onSubmitted;
+
+  final controller = ControllerAba();
   @override
   Widget build(BuildContext context) {
+    final filteredList = controller.aba
+        .where(
+          (item) => item.id >= 12 && item.id <= 19,
+        )
+        .toList();
     bool isHidden = true;
     return Scaffold(
-      backgroundColor: Color(0xFF015F85),
+      backgroundColor: Color(0xFF023048),
       appBar: AppBar(
-        backgroundColor: Color(0xFF015F85),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => LogIn(controller: controller),
+                ),
+              );
+            },
+            icon: Icon(
+              Icons.arrow_back_ios_new_outlined,
+              color: Colors.white,
+            )),
+        backgroundColor: Color(0xFF023048),
         actions: [
           IconButton(
             onPressed: () {},
@@ -40,6 +74,7 @@ class _AbaControllerState extends State<AbaController> {
               "assets/icons/qr-code.png",
               width: 40,
               height: 25,
+              color: Colors.red,
             ),
           ),
         ],
@@ -48,84 +83,26 @@ class _AbaControllerState extends State<AbaController> {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.all(15),
+              padding: EdgeInsets.all(10),
               child: Column(
                 children: [
-                  Row(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 30,
-                              backgroundImage: AssetImage(
-                                "assets/images/unnamed.jpg",
-                              ),
-                            ),
-                            Column(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(left: 15),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Hello, Kai-7!",
-                                        style: TextStyle(
-                                          fontSize: 28,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            "View Profile",
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.grey[300],
-                                            ),
-                                          ),
-                                          SizedBox(width: 3),
-                                          Image.asset(
-                                            "assets/icons/right-arrow.png",
-                                            width: 12,
-                                            height: 10,
-                                            fit: BoxFit.cover,
-                                            color: Colors.grey[300],
-                                          )
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                  profile(),
                   SizedBox(height: 20),
                   Container(
                     width: 400,
-                    height: 200,
+                    height: 180,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        color: Color(0xFF385C6C),
-                        boxShadow: [
-                          BoxShadow(
-                            color:
-                                Colors.black.withOpacity(0.1), // Shadow color
-                            spreadRadius: 2, // How much the shadow spreads
-                            blurRadius: 10, // Blur radius for a soft shadow
-                            offset:
-                                Offset(0, 5), // Moves shadow slightly downwar
-                          ),
-                        ]),
+                      borderRadius: BorderRadius.circular(25),
+                      color: Color(0xFF012032),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1), // Shadow color
+                          spreadRadius: 2, // How much the shadow spreads
+                          blurRadius: 10, // Blur radius for a soft shadow
+                          offset: Offset(0, 5), // Moves shadow slightly downwar
+                        ),
+                      ],
+                    ),
                     child: Column(
                       children: [
                         Padding(
@@ -137,7 +114,7 @@ class _AbaControllerState extends State<AbaController> {
                           ),
                           child: Container(
                             width: 390,
-                            height: 180,
+                            height: 160,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(20),
@@ -187,6 +164,7 @@ class _AbaControllerState extends State<AbaController> {
                                                   child: Image.asset(
                                                     isHidden
                                                         ? "assets/icons/view.png"
+                                                        // ignore: dead_code
                                                         : "assets/icons/hide.png", // Change icon
                                                     width: 10,
                                                     color: Color(0xFF385C6C),
@@ -201,53 +179,8 @@ class _AbaControllerState extends State<AbaController> {
                                     ),
                                   ],
                                 ),
-                                Row(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 10),
-                                      child: Container(
-                                        width: 60,
-                                        height: 25,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          color: Color(0xFF5BDAE0),
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                horizontal: 8,
-                                                vertical: 2.5,
-                                              ),
-                                              child: Row(
-                                                children: [
-                                                  Text(
-                                                    "Default",
-                                                    style: TextStyle(
-                                                      fontSize: 12,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(width: 10),
-                                    Text(
-                                      "Daily Expense",
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.grey[500],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 20),
+                                whatever(),
+                                SizedBox(height: 10),
                                 Column(
                                   children: [
                                     Row(
@@ -305,14 +238,14 @@ class _AbaControllerState extends State<AbaController> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 30),
+                  SizedBox(height: 20),
                   Center(
                     child: Container(
                       width: 400,
-                      height: 300,
+                      height: 320,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25),
-                        color: Colors.grey[500],
+                        color: Color(0xFF012032),
                         boxShadow: [
                           BoxShadow(
                             color:
@@ -324,29 +257,135 @@ class _AbaControllerState extends State<AbaController> {
                           ),
                         ],
                       ),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 12,
-                              right: 12,
-                              top: 10,
-                              bottom: 10,
-                            ),
-                            child: Container(
-                              width: 380,
-                              height: 280,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(25),
-                                color: Colors.white,
+                      child: DontKnow(controller: controller),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 30),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "ដំណឹង & ប្រម៉ូសិន",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 15),
+            Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10),
+              child: Container(
+                width: 400,
+                height: 150,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.white,
+                ),
+                child: ClipRRect(
+                  // Clip the image with rounded corners
+                  borderRadius: BorderRadius.circular(15),
+                  child: Image.network(
+                    "https://www.ababank.com/fileadmin/user_upload/Main_Banner/ABA-basic-banking-new_24.jpg",
+                    width: 350,
+                    height: 100,
+                    fit:
+                        BoxFit.cover, // Adjust the fit to cover the entire area
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 50),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "រកមើលសេវាកម្ម",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "រកមើលសេវាកម្ម",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(width: 5),
+                      Icon(
+                        Icons.arrow_forward_ios_outlined,
+                        size: 15,
+                        color: Colors.white,
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 15),
+            Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10),
+              child: Container(
+                width: 400,
+                height: 150,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: Color(0xFF012032),
+                ),
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: filteredList.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      child: Container(
+                        width: 100,
+                        height: 70,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          // color: Colors.black,
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: Image.network(
+                                "https://media.licdn.com/dms/image/v2/C4E0BAQEphx-wyPi-KQ/company-logo_200_200/company-logo_200_200/0/1630636560487?e=2147483647&v=beta&t=yYrQ4qbEwxYIth-FzZE3_zUcSthDeJA2CjIOXz_hYog",
+                                width: 70,
+                                height: 70,
+                                fit: BoxFit.cover,
                               ),
                             ),
-                          )
-                        ],
+                            const SizedBox(height: 10),
+                            Text(
+                              filteredList[index].name,
+                              maxLines: 1,
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  )
-                ],
+                    );
+                  },
+                ),
               ),
             ),
           ],
