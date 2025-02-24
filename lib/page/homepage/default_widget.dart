@@ -1,15 +1,17 @@
+import 'package:cli_firebase/page/utils/themes_color.dart';
+import 'package:cli_firebase/page/typography/typography_english.dart';
 import 'package:flutter/material.dart';
 
-class whatever extends StatefulWidget {
-  const whatever({
+class Default extends StatefulWidget {
+  const Default({
     super.key,
   });
 
   @override
-  State<whatever> createState() => _whateverState();
+  State<Default> createState() => _DefaultState();
 }
 
-class _whateverState extends State<whatever> {
+class _DefaultState extends State<Default> {
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -27,16 +29,16 @@ class _whateverState extends State<whatever> {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
+                    horizontal: 7.5,
                     vertical: 2.5,
                   ),
                   child: Row(
                     children: [
                       Text(
                         "Default",
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.white,
+                        style: typographies.label(
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.third,
                         ),
                       ),
                     ],
@@ -48,7 +50,7 @@ class _whateverState extends State<whatever> {
         ),
         SizedBox(width: 10),
         Text(
-          "Daily Expense",
+          "Savings",
           style: TextStyle(
             fontSize: 14,
             color: Colors.grey[500],
