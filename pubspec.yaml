@@ -35,7 +35,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   firebase_core: ^3.10.1
-  firebase_auth: ^5.4.2
+  firebase_auth: ^5.5.1
   svg_flutter: ^0.0.1
   flutter_svg: ^2.0.17
   flutter_svg_provider: ^1.0.7
@@ -43,6 +43,10 @@ dependencies:
   fluttertoast: ^8.2.11
   cached_network_image: ^3.4.1
   carousel_slider: ^5.0.0
+  supabase: ^2.6.3
+  image_picker: ^1.1.2
+  google_sign_in: ^6.2.2
+  flutter_facebook_auth: ^7.1.1
 
 dev_dependencies:
   flutter_test:
@@ -90,6 +94,9 @@ flutter:
     - family: khmer
       fonts:
         - asset: assets\fonts\Khmer-Regular.ttf
+    - family: muol
+      fonts:
+        - asset: assets\fonts\Moul-Regular.ttf
   #         weight: 700
   #
   # For details regarding fonts from package dependencies,

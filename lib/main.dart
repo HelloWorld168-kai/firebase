@@ -1,30 +1,36 @@
-import 'package:cli_firebase/controller/aba_service_controller.dart';
-import 'package:cli_firebase/page/homepage/aba_home_screen.dart';
+import 'package:cli_firebase/controllers/aba_service_controller.dart';
+import 'package:cli_firebase/pages/components/styles.dart';
+import 'package:cli_firebase/pages/signup_and_login/log_in.dart';
+import 'package:cli_firebase/pages/signup_and_login/sign_up.dart';
+import 'package:cli_firebase/pages/signup_and_login/social_media/phone_number.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  print("Firebase successfully initialized!");
+  final ControllerAba controller = ControllerAba();
   await Firebase.initializeApp();
   runApp(
     GetStarted(
-      controllerAba: ControllerAba(),
+      controller: controller,
     ),
   );
 }
 
 class GetStarted extends StatefulWidget {
-  final ControllerAba controllerAba;
+  final ControllerAba controller;
+
   const GetStarted({
     super.key,
-    required this.controllerAba,
+    required this.controller,
   });
 
   @override
-  State<GetStarted> createState() => _GetStarted();
+  State<GetStarted> createState() => _GetStartedState();
 }
 
-class _GetStarted extends State<GetStarted> {
+class _GetStartedState extends State<GetStarted> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -36,8 +42,8 @@ class _GetStarted extends State<GetStarted> {
         ),
         useMaterial3: true,
       ),
-      home: AbaUi(
-        controller: ControllerAba(),
+      home: SignUp(
+        controller: widget.controller,
       ),
     );
   }

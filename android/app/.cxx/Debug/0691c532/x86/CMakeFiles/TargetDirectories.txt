@@ -1,0 +1,2 @@
+D:/flutter/firebase/cli_firebase/android/app/.cxx/Debug/0691c532/x86/CMakeFiles/edit_cache.dir
+D:/flutter/firebase/cli_firebase/android/app/.cxx/Debug/0691c532/x86/CMakeFiles/rebuild_cache.dir
