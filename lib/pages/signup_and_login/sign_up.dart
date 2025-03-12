@@ -1,10 +1,12 @@
 import 'package:cli_firebase/controllers/aba_service_controller.dart';
 import 'package:cli_firebase/pages/components/styles.dart';
 import 'package:cli_firebase/pages/homepage/aba_home_screen.dart';
-import 'package:cli_firebase/pages/signup_and_login/social_media/Phone_Number.dart';
-import 'package:cli_firebase/pages/signup_and_login/social_media/facebook_signup.dart';
-import 'package:cli_firebase/pages/signup_and_login/social_media/Googgle_signup.dart';
-import 'package:cli_firebase/pages/signup_and_login/social_media/x_signup.dart';
+import 'package:cli_firebase/pages/signup_and_login/already_have_account.dart';
+import 'package:cli_firebase/pages/signup_and_login/log_in.dart';
+import 'package:cli_firebase/pages/signup_and_login/sign_up_button.dart';
+import 'package:cli_firebase/pages/signup_and_login/login_and_singup/sign_in/facebook_signup.dart';
+import 'package:cli_firebase/pages/signup_and_login/login_and_singup/sign_in/Googgle_signup.dart';
+import 'package:cli_firebase/pages/signup_and_login/login_and_singup/sign_in/phone_authenication.dart';
 import 'package:cli_firebase/pages/typography/typography_english.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +31,7 @@ class _SignInState extends State<SignUp> {
   final _emailController = TextEditingController();
   final _nameController = TextEditingController();
   bool _isLoading = false;
+
   Future<void> Clear() async {
     _nameController.clear();
     _emailController.clear();
@@ -52,11 +55,11 @@ class _SignInState extends State<SignUp> {
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(
+            Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => AbaHomeScreen(
-                  controller: widget.controller,
+                builder: (context) => LogIn(
+                  controller: ControllerAba(),
                 ),
               ),
             );
@@ -113,7 +116,7 @@ class _SignInState extends State<SignUp> {
                   SizedBox(height: 30),
                   _buildInputField(
                       controller: _passwordController,
-                      labelText: "Koma",
+                      labelText: "Password",
                       iconPath: "assets/icons/arroba.png"),
                   SizedBox(height: 30),
                   _isLoading
@@ -122,67 +125,16 @@ class _SignInState extends State<SignUp> {
                           onPressed: _signUp,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.secondary,
-                            minimumSize: const Size(double.infinity, 40),
-                          ),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 55,
-                                vertical: 7.5,
-                              ),
-                              child: Text(
-                                "Sign Up",
-                                style: TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
+                            minimumSize: const Size(
+                              double.infinity,
+                              40,
                             ),
                           ),
+                          child: sign_up_button(),
                         ),
                   SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Row(
-                          children: [
-                            Text(
-                              "Already have an account?",
-                              style: typographies.paragraph(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                            SizedBox(width: 30),
-                            InkWell(
-                              onTap: () {
-                                Navigator.pop(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => AbaHomeScreen(
-                                      controller: controller,
-                                    ),
-                                  ),
-                                );
-                              },
-                              child: Text(
-                                "Log In",
-                                style: typographies.paragraph(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+                  AlreadyHaveAccount(
+                    controller: ControllerAba(),
                   ),
                   SizedBox(height: 20),
                   Row(
@@ -211,57 +163,23 @@ class _SignInState extends State<SignUp> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 30),
-                  Container(
-                    width: 280,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.white,
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 1,
-                      ),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        left: 1,
-                        top: 1,
-                      ),
-                      child: Row(
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => PhoneNumber(
-                                    controller: ControllerAba(),
-                                  ),
-                                ),
-                              );
-                            },
-                            icon: Icon(Icons.call),
-                            iconSize: 20,
-                            color: Colors.grey[700],
-                          ),
-                          Text(
-                            "Sign In With Phone Number",
-                            style: typographies.paragraph(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 30),
+                  SizedBox(height: 20),
+                  Phone_Authentication(),
+                  SizedBox(height: 20),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      facebook_signup(),
-                      GooggleSignup(),
-                      x_signup(),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: 70,
+                        ),
+                        child: Row(
+                          children: [
+                            FacebookSignup(),
+                            SizedBox(width: 25),
+                            GooggleSignup(),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ],

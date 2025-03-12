@@ -5,6 +5,12 @@ import 'package:flutter/material.dart';
 /// It's for use with Text
 
 abstract class Typographies {
+  TextStyle page({
+    Color? color,
+    FontWeight? fontWeight,
+    int? maxLine,
+    TextOverflow? overflow,
+  });
   TextStyle display({
     Color? color,
     FontWeight? fontWeight,
@@ -93,6 +99,21 @@ class TypographiesImpl implements Typographies {
       color: color ?? AppColors.dark,
       fontWeight: fontWeight,
       fontSize: 18,
+    );
+  }
+
+  @override
+  TextStyle page({
+    Color? color,
+    FontWeight? fontWeight,
+    int? maxLine,
+    TextOverflow? overflow,
+  }) {
+    return TextStyle(
+      fontFamily: _fontFamily,
+      color: color ?? AppColors.dark,
+      fontWeight: fontWeight,
+      fontSize: 30,
     );
   }
 }

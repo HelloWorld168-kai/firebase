@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
-class facebook_signup extends StatelessWidget {
-  const facebook_signup({
+class FacebookSignup extends StatelessWidget {
+  const FacebookSignup({
     super.key,
   });
 
@@ -13,15 +13,24 @@ class facebook_signup extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        await signInWithFacebook();
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => AbaHomeScreen(
-              controller: ControllerAba(),
-            ),
-          ),
-        );
+        try {
+          UserCredential userCredential = await signInWithFacebook();
+
+          if (userCredential.user != null) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => AbaHomeScreen(
+                  controller: ControllerAba(),
+                ),
+              ),
+            );
+          } else {
+            print("Facebook login failed.");
+          }
+        } catch (e) {
+          print("Error during Facebook login: $e");
+        }
       },
       child: Container(
         width: 90,
@@ -57,16 +66,13 @@ class facebook_signup extends StatelessWidget {
   }
 
   Future<UserCredential> signInWithFacebook() async {
-    // Trigger the sign-in flow
     final LoginResult loginResult = await FacebookAuth.instance.login();
 
-    // Create a credential from the access token
     final OAuthCredential facebookAuthCredential =
         FacebookAuthProvider.credential(
       '${loginResult.accessToken!.tokenString}',
     );
 
-    // Once signed in, return the UserCredential
     return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
   }
 }
